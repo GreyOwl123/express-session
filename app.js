@@ -9,7 +9,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const mongoDb = "mongodb+srv://admin:mx1d0mL3iNsDTydJ@cluster0.ybaz7vs.mongodb.net/?retryWrites=true&w=majority"
+const mongoDb = "mongodb+srv://admin:mx1d0mL3iNsDTydJ@cluster0.ybaz7vs.mongodb.net/express_session?retryWrites=true&w=majority"
 mongoose.connect(mongoDb, { useUnifiedTopology: true, useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
@@ -71,8 +71,8 @@ app.use(function(req, res, next) {
 app.post(
   "/log-in",
   passport.authenticate("local", {
-     successRedirect: "/home",
-     failureRedirect: "/"
+     successRedirect: "/",
+     failureRedirect: "/",
   })
 );
 
