@@ -1,4 +1,6 @@
-////// app.js
+if (process.env.NODE_ENV !== "production") {
+   require('dotenv').config();
+}
 
 const bcryptjs = require("bcryptjs");
 const express = require("express");
