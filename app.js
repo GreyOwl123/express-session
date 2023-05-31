@@ -9,7 +9,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const mongoDb = "mongodb+srv://admin:mx1d0mL3iNsDTydJ@cluster0.ybaz7vs.mongodb.net/express_session?retryWrites=true&w=majority"
+const mongoDb = process.env.MONGO_DB_URL;
 mongoose.connect(mongoDb, { useUnifiedTopology: true, useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
@@ -24,8 +24,9 @@ const User = mongoose.model(
 
 
 const app = express();
-app.set("views", __dirname);
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
 
 passport.use(
   new LocalStrategy(async(username, password, done) => {
